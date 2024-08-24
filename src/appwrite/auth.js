@@ -60,11 +60,11 @@ class AuthService {
   // NOTE: getCurrentUser gives the currently logged-in user
   async getCurrentUser() {
     try {
-      const currentUser = await this.account.get();
-      return currentUser ? currentUser : null;
+      return await this.account.get();
     } catch (error) {
       throw error;
     }
+    return null;
   }
 
   // logout method
