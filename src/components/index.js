@@ -5,5 +5,19 @@ import Logo from "./Logo";
 import Container from "./Container/Container";
 import Button from "./Button";
 import Input from "./Input";
+import PostCard from "./PostCard";
+import Select from "./Select";
+import Login from "./Login";
 
-export { Header, Footer, LogoutBtn, Logo, Container, Button, Input };
+export {
+  Header,
+  Footer,
+  LogoutBtn,
+  Logo,
+  Container,
+  Button,
+  Input,
+  PostCard,
+  Select,
+  Login,
+};
