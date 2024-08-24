@@ -31,7 +31,6 @@ function App() {
     NOTE: Initially (when no user is logged-in) this code will throw an error because it will not be able to get the currently-logged-in user.
    */
     const setUserDataToStore = async () => {
-      console.log("debug test");
       try {
         const userData = await authService.getCurrentUser();
         if (userData) {
