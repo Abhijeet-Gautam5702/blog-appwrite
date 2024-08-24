@@ -64,15 +64,13 @@ class AuthService {
     } catch (error) {
       throw error;
     }
-    return null;
   }
 
   // logout method
   async logout() {
     try {
       // const response = await this.account.deleteSession("current"); // logout from the current device-session
-      const response = await this.account.deleteSessions(); // logout from all the devices/browsers
-      return response ? response : null;
+      return await this.account.deleteSessions(); // logout from all the devices/browsers
     } catch (error) {
       throw error;
     }
