@@ -11,7 +11,7 @@ function Header() {
   // useNavigate() hook to programmatically navigate to a specific route or path
   const navigate = useNavigate();
 
-  const [navItems, setNavItems] = useState([
+  const navItems = [
     {
       name: "Home",
       path: "/",
@@ -37,41 +37,7 @@ function Header() {
       path: "/add-post",
       active: authStatus,
     },
-  ]);
-
-  /*
-  useEffect(() => {
-    // console.log(authStatus)
-    setNavItems([
-      {
-        name: "Home",
-        path: "/",
-        active: true,
-      },
-      {
-        name: "Login",
-        path: "/login",
-        active: !authStatus,
-      },
-      {
-        name: "Signup",
-        path: "/signup",
-        active: !authStatus,
-      },
-      {
-        name: "All Posts",
-        path: "/all-posts",
-        active: authStatus,
-      },
-      {
-        name: "Add Post",
-        path: "/add-post",
-        active: authStatus,
-      },
-    ]);
-  }, [authStatus]);
-
-  */
+  ];
 
   return (
     <header className="py-3 shadow bg-gray-500">
@@ -88,7 +54,6 @@ function Header() {
               <li key={item.name}>
                 <button
                   onClick={() => {
-                    console.log(item.path);
                     navigate(item.path);
                   }}
                   className="inline-bock px-6 py-2 duration-200 hover:bg-blue-100 rounded-full"
