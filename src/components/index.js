@@ -8,6 +8,8 @@ import Input from "./Input";
 import PostCard from "./PostCard";
 import Select from "./Select";
 import Login from "./Login";
+import RTE from "./RTE";
+import PostForm from "./PostForm/PostForm";
 
 export {
   Header,
@@ -20,4 +22,6 @@ export {
   PostCard,
   Select,
   Login,
+  RTE,
+  PostForm,
 };

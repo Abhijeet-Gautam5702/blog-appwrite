@@ -111,7 +111,6 @@ class Service {
     } catch (error) {
       throw error;
     }
-    return null;
   }
 
   async deleteFile(fileId) {
