@@ -1,8 +1,8 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { Container } from "../index.js";
-import { useNavigate,Link } from "react-router-dom";
-import {Logo} from '../../components'
+import { useNavigate, Link } from "react-router-dom";
+import { Logo, LogoutBtn } from "../../components";
 
 function Header() {
   // get the auth-status (whether user is logged-in or not) from the redux store
@@ -11,7 +11,7 @@ function Header() {
   // useNavigate() hook to programmatically navigate to a specific route or path
   const navigate = useNavigate();
 
-  const navItems = [
+  const [navItems, setNavItems] = useState([
     {
       name: "Home",
       path: "/",
@@ -37,7 +37,41 @@ function Header() {
       path: "/add-post",
       active: authStatus,
     },
-  ];
+  ]);
+
+  /*
+  useEffect(() => {
+    // console.log(authStatus)
+    setNavItems([
+      {
+        name: "Home",
+        path: "/",
+        active: true,
+      },
+      {
+        name: "Login",
+        path: "/login",
+        active: !authStatus,
+      },
+      {
+        name: "Signup",
+        path: "/signup",
+        active: !authStatus,
+      },
+      {
+        name: "All Posts",
+        path: "/all-posts",
+        active: authStatus,
+      },
+      {
+        name: "Add Post",
+        path: "/add-post",
+        active: authStatus,
+      },
+    ]);
+  }, [authStatus]);
+
+  */
 
   return (
     <header className="py-3 shadow bg-gray-500">
@@ -53,7 +87,10 @@ function Header() {
             item.active ? (
               <li key={item.name}>
                 <button
-                  onClick={() => navigate(item.path)}
+                  onClick={() => {
+                    console.log(item.path);
+                    navigate(item.path);
+                  }}
                   className="inline-bock px-6 py-2 duration-200 hover:bg-blue-100 rounded-full"
                 >
                   {item.name}

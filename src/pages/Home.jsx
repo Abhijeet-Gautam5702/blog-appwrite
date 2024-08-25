@@ -7,6 +7,7 @@ import { useNavigate } from "react-router-dom";
 function Home() {
   // local state
   const [posts, setPosts] = useState([]);
+  const [loading, setLoading] = useState(true);
 
   const status = useSelector((state) => state.status);
 
@@ -14,11 +15,21 @@ function Home() {
     /*
         NOTE: We are using promise-syntax instead of async-await because the callback inside useEffect() must not be asynchronous. We will have to create another function outside useEffect() and then invoke it here (just like we did in AllPosts.jsx) but using promise-syntax is less of a hassle :)
     */
-    service
-      .getAllPosts()
-      .then((posts) => setPosts(posts ? posts.documents : []));
+    service.getAllPosts().then((posts) => {
+      setPosts(posts ? posts.documents : []);
+      setLoading(false);
+    });
   }, []);
 
+  if (loading) {
+    return (
+      <div className="w-full py-8 mt-4 text-center">
+        <Container>
+          <h1 className="text-2xl font-bold">Loading...</h1>
+        </Container>
+      </div>
+    );
+  }
   if (!status) {
     return (
       <div className="w-full py-8 mt-4 text-center">

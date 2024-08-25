@@ -17,14 +17,14 @@ function PostForm({ post }) {
   const { register, handleSubmit, watch, control, setValue, getValues } =
     useForm({
       defaultValues: {
-        title: post.title ? post.title : "",
-        content: post.content ? post.content : "",
-        status: post.status ? post.status : "active",
-        slug: post.$id ? post.$id : "",
+        title: post ? post.title : "",
+        content: post ? post.content : "",
+        status: post ? post.status : "active",
+        slug: post ? post.$id : "",
       },
     });
 
-  const formSubmit = async () => {
+  const formSubmit = async (data) => {
     // if post details are provided => update the post using the data from the form
     if (post) {
       // update featuredImage file
@@ -82,6 +82,8 @@ function PostForm({ post }) {
 
   // Whenever the component renders (or its dependencies change) => set the slug-value from the title value
   useEffect(() => {
+    // console.log(`PostForm.jsx useEffect: post = `, post);
+
     // create a subscription where we watch the input-form named "title" and transform the slug-input form accordingly
     const subscription = watch((value, { name }) => {
       if (name === "title") {
@@ -91,7 +93,7 @@ function PostForm({ post }) {
 
     // Optimization: This cleans up the useEffect logic before the component re-renders and/or unmounts
     return () => subscription.unsubscribe();
-  }, [watch, slugTransform, setValue]);
+  }, [watch, slugTransform, setValue,post]);
 
   return (
     <form onSubmit={handleSubmit(formSubmit)}>
@@ -101,17 +103,18 @@ function PostForm({ post }) {
           placeholder="Title"
           className="mb-4"
           {...register("title", { required: true })}
+          onChange = {(e) => setValue("slug",slugTransform(e.currentTarget.value))}
         />
         <Input
           label="Slug :"
           placeholder="Slug"
           className="mb-4"
           {...register("slug", { required: true })}
-          onInput={(e) => {
-            setValue("slug", slugTransform(e.currentTarget.value), {
-              shouldValidate: true,
-            });
-          }}
+          // onInput={(e) => {
+          //   setValue("slug", slugTransform(e.currentTarget.value), {
+          //     shouldValidate: true,
+          //   });
+          // }}
         />
         <RTE
           label="Content :"

@@ -16,27 +16,10 @@ export default function Protected({ children, authentication }) {
   const authStatus = useSelector((state) => state.status);
 
   useEffect(() => {
-    // if (!authStatus) {
-    //   navigate("/"); //user already logged-in => redirect to home-route
-    // }
-    // else {
-    //   navigate("/login"); // user not logged-in => redirect to login-route
-    // }
-
-    // if (authentication !== authStatus) {
-    //   if (!authentication) {
-    //     navigate("/login");
-    //   } else {
-    //     navigate("/");
-    //   }
-    // }
-
+    // if authentication is needed for the route and user is not authenticated => redirect to login page ("/login")
     if (authentication && authStatus !== authentication) {
       navigate("/login");
-    } else if (!authentication && authStatus !== authentication) {
-      navigate("/");
     }
-
     setLoading(false);
   }, [authStatus, navigate]);
 

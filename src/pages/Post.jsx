@@ -1,11 +1,14 @@
 import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
-import { resolvePath, useNavigate, useParams } from "react-router-dom";
+import { useNavigate, useParams, Link } from "react-router-dom";
 import service from "../appwrite/config";
+import { Container, Button } from "../components";
+import parse from "html-react-parser";
 
 function Post() {
   // local state
   const [post, setPost] = useState(null);
+  const [loading, setLoading] = useState(true);
 
   const navigate = useNavigate();
   const { slug } = useParams();
@@ -19,6 +22,7 @@ function Post() {
       service.getPost(slug).then((post) => {
         if (post) {
           setPost(post);
+          setLoading(false);
         } else {
           navigate("/");
         }
@@ -42,12 +46,19 @@ function Post() {
     }
   };
 
+  if (loading) {
+    return (
+      <div className="py-8">
+        <h2 className="text-2xl font-bold"> Loading...</h2>
+      </div>
+    );
+  }
   return post ? (
     <div className="py-8">
       <Container>
         <div className="w-full flex justify-center mb-4 relative border rounded-xl p-2">
           <img
-            src={appwriteService.getFilePreview(post.featuredImage)}
+            src={service.getFilePreview(post.featuredImage)}
             alt={post.title}
             className="rounded-xl"
           />
