@@ -1,7 +1,8 @@
 import React from "react";
 import { useSelector } from "react-redux";
 import { Container } from "../index.js";
-import { useNavigate } from "react-router-dom";
+import { useNavigate,Link } from "react-router-dom";
+import {Logo} from '../../components'
 
 function Header() {
   // get the auth-status (whether user is logged-in or not) from the redux store

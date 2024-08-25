@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 
@@ -16,18 +16,25 @@ export default function Protected({ children, authentication }) {
   const authStatus = useSelector((state) => state.status);
 
   useEffect(() => {
-    // if (authStatus) {
+    // if (!authStatus) {
     //   navigate("/"); //user already logged-in => redirect to home-route
-    // } else {
+    // }
+    // else {
     //   navigate("/login"); // user not logged-in => redirect to login-route
     // }
 
-    if (authentication !== authStatus) {
-      if (authentication) {
-        navigate("/login");
-      } else {
-        navigate("/");
-      }
+    // if (authentication !== authStatus) {
+    //   if (!authentication) {
+    //     navigate("/login");
+    //   } else {
+    //     navigate("/");
+    //   }
+    // }
+
+    if (authentication && authStatus !== authentication) {
+      navigate("/login");
+    } else if (!authentication && authStatus !== authentication) {
+      navigate("/");
     }
 
     setLoading(false);
