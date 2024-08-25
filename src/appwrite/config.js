@@ -67,7 +67,6 @@ class Service {
     } catch (error) {
       throw error;
     }
-    return false; // something went wrong
   }
 
   async getPost(slug) {
@@ -80,7 +79,6 @@ class Service {
     } catch (error) {
       throw error;
     }
-    return null;
   }
 
   /*
